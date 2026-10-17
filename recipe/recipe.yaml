@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: "0.15.3"
+  python_check_max: "3.14"
+
+package:
+  name: curies
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/c/curies/curies-${{ version }}.tar.gz
+  sha256: 6c613b63c3d3f485fcc42248309d011911cc1c51fc0c6a54a30311d4dc87a6aa
+
+build:
+  number: 0
+  noarch: python
+  python:
+    entry_points:
+      - curies = curies.cli:main
+  script:
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check --check-build-dependencies
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - uv-build >=0.9.6,<1.0
+  run:
+    - python >=${{ python_min }}
+    - pystow >=0.9.0
+    - pydantic >=2.0
+    - typing_extensions
+
+tests:
+  - package_contents:
+      strict: true
+      site_packages:
+        - curies/**
+        - curies-${{ version }}.dist-info/**
+  - python:
+      imports: curies
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - ${{ python_check_max }}.*
+  - requirements:
+      run:
+        - click
+        - python ${{ python_min }}.*
+    script:
+      - curies --help
+
+about:
+  summary: Idiomatic conversion between URIs and compact URIs (CURIEs)
+  license: MIT
+  license_file: LICENSE
+  homepage: https://pypi.org/project/curies
+  repository: https://github.com/biopragmatics/curies
+  documentation: https://curies.readthedocs.io
+
+extra:
+  recipe-maintainers:
+    - isuruf
+    - dillonroach
+    - bollwyvl
