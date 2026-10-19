@@ -2,8 +2,8 @@
 schema_version: 1
 
 context:
-  version: "0.15.3"
-  python_check_max: "3.14"
+  version: "0.15.4"
+  python_check_max: "3.15"
 
 package:
   name: curies
@@ -11,7 +11,7 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/c/curies/curies-${{ version }}.tar.gz
-  sha256: 6c613b63c3d3f485fcc42248309d011911cc1c51fc0c6a54a30311d4dc87a6aa
+  sha256: 0dc7d44943b9991c518942e824905c1a19bbe24f43d4a790e87d2e42472483df
 
 build:
   number: 0
@@ -29,9 +29,10 @@ requirements:
     - uv-build >=0.9.6,<1.0
   run:
     - python >=${{ python_min }}
-    - pystow >=0.9.0
     - pydantic >=2.0
     - typing_extensions
+  run_constraints:
+    - pystow >=0.10.2
 
 tests:
   - package_contents:
