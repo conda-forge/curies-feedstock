@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "0.15.7"
+  version: "0.15.8"
   python_check_max: "3.15"
 
 package:
@@ -11,7 +11,7 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/c/curies/curies-${{ version }}.tar.gz
-  sha256: f7ed98cfcac05e37a0295e09dc7ed622ef9b0e0b98c88c48613fc00f9939b6a7
+  sha256: 9676165fa0f057625b8a773ada68c9e88928701110ccaace1eadc4c104c8f3da
 
 build:
   number: 0
